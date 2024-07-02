@@ -16,7 +16,7 @@ app.get("/api/hello/:name",async(req,res)=>{
     try{
         const response = await axios.get(url)
         data = {
-            client_ip:response.data.ip,
+            client_ip:clientIp,
             location:response.data.city,
             gretting:`hello ${name} the temperature is 11 deggress celcius in ${response.data.city}`
         }
