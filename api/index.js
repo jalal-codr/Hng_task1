@@ -4,6 +4,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
+app.get("/api", (req, res) => res.send("Express on Vercel"));
 
 
 app.get("/api/hello/:name",async(req,res)=>{
@@ -28,3 +29,4 @@ app.get("/api/hello/:name",async(req,res)=>{
 
 
 app.listen(8500,()=>console.log('server runing on port 8500'));
+module.exports = app;
