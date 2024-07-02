@@ -18,7 +18,7 @@ app.get("/api/hello/:name",async(req,res)=>{
         data = {
             client_ip:clientIp,
             location:response.data.city,
-            gretting:`hello ${name} the temperature is 11 deggress celcius in ${response.data.city}`
+            greeting:`Hello, ${name}!,the temperature is 11 degrees Celcius in ${response.data.city}`
         }
         res.send(data);
         
