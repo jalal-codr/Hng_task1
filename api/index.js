@@ -1,5 +1,7 @@
 const express = require("express");
 const axios = require("axios")
+const url = require('url');
+const { request } = require("http");
 require('dotenv').config();
 const app = express();
 app.use(express.json());
@@ -8,8 +10,12 @@ app.set('trust proxy',true);
 app.get("/api", (req, res) => res.send("Express on Vercel"));
 
 
-app.get("/api/hello/:name",async(req,res)=>{
-    const name = req.params.name
+app.get("/api/hello",async(req,res)=>{
+    let urlObject = url.parse(req.url,true);
+    const urlQuery = urlObject.query
+    
+    const name = urlQuery.visitor_name;
+
     const xForwardedFor = req.headers['x-forwarded-for'];
     const clientIp = xForwardedFor ? xForwardedFor.split(',')[0].trim() : req.socket.remoteAddress;
     const url = `https://ipinfo.io/${clientIp}?token=${process.env.Token}`;
@@ -26,6 +32,7 @@ app.get("/api/hello/:name",async(req,res)=>{
     catch(err){
         res.send(err)
     } 
+
 })
 
 
