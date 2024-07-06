@@ -16,22 +16,7 @@ app.get("/api/hello",async(req,res)=>{
     
     const name = urlQuery.visitor_name;
 
-    const xForwardedFor = req.headers['x-forwarded-for'];
-    const clientIp = xForwardedFor ? xForwardedFor.split(',')[0].trim() : req.socket.remoteAddress;
-    const url = `https://ipinfo.io/${clientIp}?token=${process.env.Token}`;
-    try{
-        const response = await axios.get(url)
-        data = {
-            client_ip:clientIp,
-            location:response.data.city,
-            greeting:`Hello, ${name}!,the temperature is 11 degrees Celcius in ${response.data.city}`
-        }
-        res.send(data);
-        
-    }
-    catch(err){
-        res.send(err)
-    } 
+    res.send(name)
 
 })
 
